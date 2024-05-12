@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import styles from "./star.module.scss";
-const StarRating = () => {
+const StarRating = (prop:any) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
 
@@ -32,7 +32,7 @@ function handleClick(getCurrIndex: number) {
             onClick={() => handleClick(index)}
             onMouseMove={() => handleMouseEnter(index)}
             onMouseLeave={() => handleMouseLeave()}
-            size={20}
+            size={prop.size}
           />
         );
       })}

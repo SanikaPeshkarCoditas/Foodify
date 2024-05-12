@@ -2,22 +2,20 @@ import { useState } from "react";
 import styles from "./login.module.scss";
 import { useForm } from "react-hook-form";
 import { LoginProps } from "./login.types";
-import { render } from "sass";
 
-
-
-export default function Login(props:LoginProps) {
+export default function Login(props: LoginProps) {
   const [loginData, setLoginData] = useState<FormData | null>(null);
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
     setLoginData(data);
     console.log(data);
+  
+    props.onLogin('admin');
   };
 
   return (
@@ -39,14 +37,13 @@ export default function Login(props:LoginProps) {
           <input
             type="password"
             placeholder="enter your password"
-            name="password"
+            {...register("password")} 
           />
         </div>
 
         <div>
           <button
             type="submit"
-            onClick={() => props.onLogin('home')}
             className={styles.LoginBtn}
           >
             Login

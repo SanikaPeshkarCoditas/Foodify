@@ -1,30 +1,91 @@
-import StarRating from "../ui/StarRating/Starrating.tsx";
+import { useEffect, useState } from "react";
+import StarRating from "../ui/StarRating/Starrating.tsx"; 
 import styles from "./ResPage.module.scss";
 import { ResPageProps } from "./ResPage.types.ts";
+import { useForm } from "react-hook-form";
+import { Feedback } from "../../../userdata.ts";
+import { RESDATA } from "../../../resdata.ts";
 
-const ResPage = ({}: ResPageProps) => {
-  return (
-    <div className={styles.ResPageMain}>
-      <div className={styles.ResPageUpper}>
-        <img src="" alt="restaurant Image here"></img>
-        <div className={styles.ResPageContent}>
-          <h3>Restauarnt Name</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse iusto
-            aut alias amet officia eos obcaecati rerum necessitatibus
-            consequuntur eligendi.
-          </p>
+interface FormData {
+  feedback: string;
+}
 
-          <div className={styles.FeedbackContainer}>
-            <StarRating/>
-            <div className={styles.Feedback}>
-                <textarea placeholder="feedback"></textarea><button> Give Feedback</button></div>
+const ResPage = ({ selecteddata,feedbackdata }: ResPageProps) => {
+
+  const [feedback, setFeedback] = useState<Feedback[]>(feedbackdata);
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const addFeedback = (data: FormData) => {
+    const newFeedback = {
+      userid: 1,
+      resid: selecteddata[0].resid, 
+      rating: 5, 
+      feedbackText: data.feedback 
+    };
+  
+    setFeedback(prevFeedback => [...prevFeedback, newFeedback]);
+  };
+
+  useEffect(() => {
  
+    console.log("Feedback updated:", feedback);
+  }, [feedback]);
+
+  return (
+    <>
+      {selecteddata.map((item:RESDATA) => (
+        <div className={styles.ResPageMain} key={item.id}>
+          <div className={styles.ResPageUpper}>
+            <div>
+              <img
+                src={item.resimg}
+                alt="restaurant Image here"
+                height={300}
+                width={500}
+              />
+              <img
+                src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MTY2MTU3Ny13aWtpbWVkaWEtaW1hZ2Uta293YXBlZWouanBn.jpg"
+                alt="restaurant Image here"
+                height={300}
+                width={500}
+              />
+            </div>
+            <div className={styles.ResPageContent}>
+              <h3>{item.resname}</h3>
+              <p>
+                {item.resdesc}
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius
+                harum eos deleniti. Possimus itaque quae totam deleniti quaerat!
+                Eligendi, voluptatum corporis! Tenetur vel possimus eius impedit
+                sunt nobis? Aperiam exercitationem eos molestias neque tempora
+                animi modi quas consequatur omnis illo laudantium minus,
+                molestiae reprehenderit, ipsam accusamus sint nobis commodi
+                recusandae?
+              </p>
+
+              <div className={styles.FeedbackContainer}>
+                <h3>Rate Us :;</h3>
+                <StarRating size={50} />
+                <div className={styles.Feedback}>
+                  <h3>Leave Us a valuable Feedback</h3>
+                  <form onSubmit={handleSubmit(addFeedback)}>
+                    <textarea placeholder="feedback" {...register("feedback")} />
+                    <button type="submit" className={styles.FeedbackBtn}>
+                      Give Feedback
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-    </div>
+      ))}
+    </>
   );
 };
 

@@ -1,11 +1,11 @@
 import ResCard from "../ResCard/ResCard.tsx";
 import styles from "./ResDashboard.module.scss";
 import { ResDashboardProps } from "./ResDashboard.types.ts";
-import { RESTAURANTS } from "../../../data.ts";
+import { RESTAURANTS } from "../../../resdata.ts";
 
-const ResDashboard = ({onclick}: ResDashboardProps) => {
+const ResDashboard = ({onclick,handleselected}: ResDashboardProps) => {
   return (
-    <div className="">
+    <div className={styles.ResDashboard}>
       <h2>Best Restaurants In the town </h2>
       <div className={styles.dashboardMain} >
         {RESTAURANTS.map((restaurant: any) => {
@@ -16,7 +16,8 @@ const ResDashboard = ({onclick}: ResDashboardProps) => {
               resimg={restaurant.resimg}
               resdesc={restaurant.resdesc}
               feedback={[]}
-              onClick={onclick}
+              handleselected={handleselected}
+              handleclick={onclick}
             />
           );
         })}
