@@ -1,12 +1,13 @@
 .FeedbackCard{
     padding:1rem;
     border-radius: 10px;
-    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(187, 187, 187);
     background-color: white;
 
 
     &:hover{
-        background-color: rgba(176, 163, 140, 0.526);
+        color:white;
+        background-color: rgb(246, 224, 102);
         transition: all 0.5s;
     }
 }

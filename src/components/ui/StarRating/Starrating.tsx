@@ -19,7 +19,7 @@ function handleClick(getCurrIndex: number) {
   return (
     <div className={styles.Star}>
 
-      {[...Array(5)].map((_, index) => {
+      {[...Array(prop.rating)].map((_, index) => {
         // index += 1;
         return (
           <FaStar

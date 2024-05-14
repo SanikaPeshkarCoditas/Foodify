@@ -1,12 +1,48 @@
-export interface Users{
-    userid:number,
-    username:string,
-    address:string,
-    userimg:string
+export interface User {
+  userid: number;
+  username: string;
+  password:string;
+  address: string;
+  userimg: string;
+}
 
-  }
-
-  
+export const USERS: User[] = [
+  {
+    userid: 1,
+    username: 'arpita',
+    password:'password1',
+    address: 'pune',
+    userimg: 'url1',
+  },
+  {
+    userid: 2,
+    username: 'john',
+    password:'password1',
+    address: 'new york',
+    userimg: 'url2',
+  },
+  {
+    userid: 3,
+    username: 'admin',
+    password:'password',
+    address: 'london',
+    userimg: 'url3',
+  },
+  {
+    userid: 4,
+    username: 'alex',
+    password:'password1',
+    address: 'sydney',
+    userimg: 'url4',
+  },
+  {
+    userid: 5,
+    username: 'mia',
+    password:'password1',
+    address: 'tokyo',
+    userimg: 'url5',
+  },
+];
 
 
 

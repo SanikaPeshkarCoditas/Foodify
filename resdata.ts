@@ -7,12 +7,6 @@ export interface RESDATA{
 
 }
 
-export interface Userfeedback{
-  userid:number;
-  username:string;
-  rating:number;
-  feedbackeach:string;
-}
 
 export const RESTAURANTS: RESDATA[] = [
   {
